@@ -4,13 +4,14 @@
 	2/28/20: SQL File created
 	3/2/20: Added go to after CREATE DATABASE disk_inventoryJK, added Artist_Type_ID as a FK to Artist, Added NULL to Returned date to allow NULLs
 	3/5/20: Added code to insert data into the tables.
+	3/12/2020: Added SQL statments under Project 3
 **************************************************/
 use master;
 go
 
 --Drop Database in case it already exists
 DROP DATABASE IF EXISTS disk_inventoryJK;
-
+GO
 --Create the database
 CREATE DATABASE disk_inventoryJK;
 go
@@ -38,7 +39,7 @@ CREATE TABLE CD_Type (
 CREATE TABLE CD (
 	CD_ID			INT NOT NULL PRIMARY KEY,
 	CD_name			VARCHAR(60) NOT NULL,
-	Release_Date	DATETIME NOT NULL,
+	Release_Date	DATE NOT NULL,
 	Type_ID			INT NOT NULL REFERENCES CD_Type(Type_ID),
 	Status_ID		INT NOT NULL REFERENCES Status(Status_ID),
 	Genre_ID		INT NOT NULL REFERENCES Genre(Genre_ID));
@@ -68,10 +69,10 @@ CREATE TABLE Borrowed (
 
 --Create CD_Borrowed table
 CREATE TABLE CD_Borrowed (
-	Borrowed_date	DATETIME NOT NULL PRIMARY KEY,
+	Borrowed_date	DATE NOT NULL PRIMARY KEY,
 	CD_ID			INT NOT NULL REFERENCES CD(CD_ID),
 	Borrower_ID		INT NOT NULL REFERENCES Borrowed(Borrower_ID),
-	Returned_Date	DATETIME NULL);
+	Returned_Date	DATE NULL);
 
 
 --Create new user diskUserXX
@@ -264,3 +265,69 @@ GO
 SELECT Borrower_ID, CD_ID, Borrowed_date, Returned_Date
 FROM CD_Borrowed
 WHERE Returned_Date IS NULL
+
+/***************************************
+			PROJECT 3
+***************************************/
+
+
+--3. Display the disk name, the release date and the artist name of disks with only indiviual artists
+SELECT CD_name AS 'Disk Name', Release_Date AS 'Release Date', SUBSTRING(Artist_Name, 1, CHARINDEX(' ', Artist_Name)) AS 'Artist First Name',
+	SUBSTRING(Artist_Name, CHARINDEX(' ', Artist_Name) + 1, 10) AS 'Artist Last Name'
+FROM CD JOIN CD_Artists
+	ON CD.CD_ID = CD_Artists.CD_ID
+	JOIN Artist ON CD_Artists.Artist_ID = Artist.Artist_ID
+WHERE Artist.Artist_Type_ID = 1
+ORDER BY [Artist First Name];
+GO
+
+--4. Create a View and display the artist names. Include the Artist ID in the View, but don't display it
+DROP VIEW IF EXISTS View_Individual_Artist;
+GO
+
+CREATE VIEW View_Individual_Artist
+AS
+	SELECT Artist_ID, Artist_Name, Artist_Type_ID
+	FROM Artist
+	WHERE Artist_Type_ID = 1;
+GO
+
+SELECT SUBSTRING(Artist_Name, 1, CHARINDEX(' ', Artist_Name)) AS FirstName, 
+	SUBSTRING(Artist_Name, CHARINDEX(' ', Artist_Name) + 1, 10) AS LastName
+FROM View_Individual_Artist
+ORDER BY FirstName, LastName;
+GO
+
+--5. Display Disk Name, Release Date and the Group Name of the disks that involve a group. Use View_Individual_Artist view.
+SELECT CD_name AS 'Disk Name', Release_Date AS 'Release Date', Artist_Name AS 'Group Name'
+FROM CD JOIN CD_Artists
+	ON CD.CD_ID = CD_Artists.CD_ID
+	JOIN Artist ON CD_Artists.Artist_ID = Artist.Artist_ID
+WHERE Artist.Artist_ID NOT IN (SELECT Artist_ID FROM View_Individual_Artist)
+ORDER BY [Group Name];
+GO
+
+--6. Show the name of borrower, the disk and the borrowed/returned dates of borrowed disks
+SELECT Borrower_FName AS 'First Name', Borrower_LName AS 'Last Name', CD_name AS 'CD Name', Borrowed_date AS 'Borrowed Date', Returned_Date AS 'Returned Date'
+FROM Borrowed JOIN CD_Borrowed
+	ON Borrowed.Borrower_ID = CD_Borrowed.Borrower_ID
+	JOIN CD ON CD_Borrowed.CD_ID = CD.CD_ID
+ORDER BY CD_name, Borrower_LName, Borrower_FName, Borrowed_date, Returned_Date;
+GO
+
+--7. Show the number of times each disk has been borrowed
+SELECT CD.CD_ID AS 'CD ID', CD_name AS 'CD Name', COUNT(*) AS 'Times borrowed'
+FROM CD JOIN CD_Borrowed
+	ON CD_Borrowed.CD_ID = CD.CD_ID
+	JOIN Borrowed ON Borrowed.Borrower_ID = CD_Borrowed.Borrower_ID
+GROUP BY CD.CD_ID, CD_name
+ORDER BY CD.CD_ID;
+GO
+
+--8. Show the disks that have yet to be returned
+SELECT CD_name AS 'CD Name', Borrowed_date AS 'Borrowed Date', Returned_date AS 'Returned Date', Borrower_LName AS'Last Name'
+FROM CD JOIN CD_Borrowed
+	ON CD_Borrowed.CD_ID = CD.CD_ID
+	JOIN Borrowed ON Borrowed.Borrower_ID = CD_Borrowed.Borrower_ID
+WHERE Returned_Date IS NULL;
+GO
