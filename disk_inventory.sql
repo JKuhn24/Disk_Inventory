@@ -4,7 +4,8 @@
 	2/28/20: SQL File created
 	3/2/20: Added go to after CREATE DATABASE disk_inventoryJK, added Artist_Type_ID as a FK to Artist, Added NULL to Returned date to allow NULLs
 	3/5/20: Added code to insert data into the tables.
-	3/12/2020: Added SQL statments under Project 3
+	3/12/2020: Added SQL statments under Project 4
+	4/8/2020: Added Statments for Project 5. Changed tables to auto increment when needed.
 **************************************************/
 use master;
 go
@@ -37,7 +38,7 @@ CREATE TABLE CD_Type (
 
 --Create CD table
 CREATE TABLE CD (
-	CD_ID			INT NOT NULL PRIMARY KEY,
+	CD_ID			INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	CD_name			VARCHAR(60) NOT NULL,
 	Release_Date	DATE NOT NULL,
 	Type_ID			INT NOT NULL REFERENCES CD_Type(Type_ID),
@@ -51,7 +52,7 @@ CREATE TABLE Artist_Type (
 
 --Create Artist table
 CREATE TABLE Artist (
-	Artist_ID		INT NOT NULL PRIMARY KEY,
+	Artist_ID		INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	Artist_Name		VARCHAR(60) NOT NULL,
 	Artist_Type_ID	INT NOT NULL REFERENCES Artist_Type(Artist_Type_ID));
 
@@ -62,7 +63,7 @@ CREATE TABLE CD_Artists (
 
 --Create Borrowed table
 CREATE TABLE Borrowed (
-	Borrower_ID		INT NOT NULL PRIMARY KEY,
+	Borrower_ID		INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	Borrower_FName	VARCHAR(60) NOT NULL,
 	Borrower_LName	VARCHAR(60) NOT NULL,
 	Borrower_Phone	VARCHAR(60) NOT NULL);
@@ -125,53 +126,53 @@ VALUES
 
 --Insert data into the Artist table
 INSERT INTO Artist
-	(Artist_ID, Artist_Name, Artist_Type_ID)
+	(Artist_Name, Artist_Type_ID)
 VALUES
-	(1, 'Ozzy Osborne', 1),
-	(2, 'Taylor Swift', 1),
-	(3, 'Alanis Morrisette', 1),
-	(4, 'Chris Daughtry', 1),
-	(5, 'The Cars', 2),
-	(6, 'Black Sabbath', 2),
-	(7, 'The Eagles', 2),
-	(8, 'Patsy Cline', 1),
-	(9, 'Pearl Jam', 2),
-	(10, 'Shinedown', 2),
-	(11, 'Collective Soul', 2),
-	(12, 'Five Finger Death Punch', 2),
-	(13, 'Disturbed', 2),
-	(14, 'Stone Temple Pilots', 2),
-	(15, 'Breaking Benjamin', 2),
-	(16, 'Seether', 2),
-	(17, 'Sudioslave', 2),
-	(18, 'Temple of the Dog', 2),
-	(19, 'Alice in Chains', 2),
-	(20, 'Willie Nelson', 1);
+	( 'Ozzy Osborne', 1),
+	( 'Taylor Swift', 1),
+	( 'Alanis Morrisette', 1),
+	( 'Chris Daughtry', 1),
+	( 'The Cars', 2),
+	( 'Black Sabbath', 2),
+	( 'The Eagles', 2),
+	( 'Patsy Cline', 1),
+	( 'Pearl Jam', 2),
+	( 'Shinedown', 2),
+	( 'Collective Soul', 2),
+	( 'Five Finger Death Punch', 2),
+	( 'Disturbed', 2),
+	( 'Stone Temple Pilots', 2),
+	( 'Breaking Benjamin', 2),
+	( 'Seether', 2),
+	( 'Sudioslave', 2),
+	( 'Temple of the Dog', 2),
+	( 'Alice in Chains', 2),
+	( 'Willie Nelson', 1);
 
 --Insert into the CD table
 INSERT INTO CD 
-	(CD_ID, CD_name, Release_Date, Genre_ID, Status_ID, Type_ID)
+	(CD_name, Release_Date, Genre_ID, Status_ID, Type_ID)
 VALUES
-(1, 'Crazy Train', '1/1/1995', 1, 1, 1),
-(2, 'No More Tears', '11/21/1995', 1, 1, 1),
-(3, 'Red', '11/13/2000', 2, 2, 1),
-(4, 'Jagged Little Pill', '1/15/1995', 1, 2, 1),
-(5, 'Candy-O', '10/10/1992', 1, 2, 2),
-(6, 'Hotel California', '11/10/1977', 1, 2, 2),
-(7, 'One of These Nights', '4/1/1975', 1, 2, 2),
-(8, 'Hints, Allegations and Things Left Unsaid', '1/21/1999', 4, 2, 1),
-(9, 'Blender', '1/29/2000', 4, 1, 2),
-(10, 'Dirt', '1/27/1992', 1, 2, 3),
-(11, 'Unplugged', '5/23/2000', 4, 1, 2),
-(12, 'Facelift', '1/1/2000', 4, 2, 2),
-(13, 'Black Gives Way to Blue', '11/21/2009', 4, 1, 2),
-(14, 'Live', '11/11/2009', 4, 1, 2),
-(15, 'Ten', '12/1/1991', 4, 1, 2),
-(16, 'Vitalogy', '3/22/1994', 4, 1, 2),
-(17, 'No Code', '4/2/1996', 4, 1, 2),
-(18, 'Home', '1/19/1995', 1, 2, 1),
-(19, 'Backspacer', '5/21/2000', 4, 1, 2),
-(20, 'Disagree', '1/29/2008', 4, 1, 1);
+('Crazy Train', '1/1/1995', 1, 1, 1),
+('No More Tears', '11/21/1995', 1, 1, 1),
+('Red', '11/13/2000', 2, 2, 1),
+('Jagged Little Pill', '1/15/1995', 1, 2, 1),
+('Candy-O', '10/10/1992', 1, 2, 2),
+('Hotel California', '11/10/1977', 1, 2, 2),
+('One of These Nights', '4/1/1975', 1, 2, 2),
+('Hints, Allegations and Things Left Unsaid', '1/21/1999', 4, 2, 1),
+('Blender', '1/29/2000', 4, 1, 2),
+('Dirt', '1/27/1992', 1, 2, 3),
+('Unplugged', '5/23/2000', 4, 1, 2),
+('Facelift', '1/1/2000', 4, 2, 2),
+('Black Gives Way to Blue', '11/21/2009', 4, 1, 2),
+('Live', '11/11/2009', 4, 1, 2),
+('Ten', '12/1/1991', 4, 1, 2),
+('Vitalogy', '3/22/1994', 4, 1, 2),
+('No Code', '4/2/1996', 4, 1, 2),
+('Home', '1/19/1995', 1, 2, 1),
+('Backspacer', '5/21/2000', 4, 1, 2),
+('Disagree', '1/29/2008', 4, 1, 1);
 
 --Update the CD table to adjust release date
 UPDATE CD
@@ -206,33 +207,33 @@ VALUES
 
 --Insert data into the CD Borrowed Table
 INSERT INTO Borrowed
-	(Borrower_ID, Borrower_FName, Borrower_LName, Borrower_Phone)
+	(Borrower_FName, Borrower_LName, Borrower_Phone)
  VALUES
-(1, 'John', 'Smith', '(208) 523-7852'),
-(2, 'Jacob', 'Mathews', '(208) 423-5235'),
-(3, 'Steve', 'Williams', '(208) 785-8523'),
-(4, 'Phillip', 'Stevens', '(208) 314-1592'),
-(5, 'Karen', 'Stevens', '(208) 653-4856'),
-(6, 'Martin', 'Martinez', '(208) 795-3587'),
-(7, 'Sally', 'Clark', '(208) 347-8462'),
-(8, 'John', 'Baker', '(208) 258-3214'),
-(9, 'John', 'Nelson', '(208) 123-4567'),
-(10, 'Eric', 'Adams', '(208) 891-0111'),
-(11, 'Troy', 'Scott', '(208) 212-2562'),
-(12, 'Jaime', 'Rodriguez', '(208) 647-6258'),
-(13, 'Jeff', 'Hill', '(208) 475-6952'),
-(14, 'Laura', 'Taylor', '(208) 368-6541'),
-(15, 'Steven', 'Lee', '(208) 321-6543'),
-(16, 'Kat', 'Davis', '(208) 987-6543'),
-(17, 'David', 'Jones', '(208) 210-3654'),
-(18, 'Jackson', 'Moore', '(208) 945-2543'),
-(19, 'Emilia', 'Walker', '(208) 478-7852'),
-(20, 'Nathan', 'Young', '(208) 752-6547');
+('John', 'Smith', '(208) 523-7852'),
+('Jacob', 'Mathews', '(208) 423-5235'),
+('Steve', 'Williams', '(208) 785-8523'),
+('Phillip', 'Stevens', '(208) 314-1592'),
+('Karen', 'Stevens', '(208) 653-4856'),
+('Martin', 'Martinez', '(208) 795-3587'),
+('Sally', 'Clark', '(208) 347-8462'),
+('John', 'Baker', '(208) 258-3214'),
+('John', 'Nelson', '(208) 123-4567'),
+('Eric', 'Adams', '(208) 891-0111'),
+('Troy', 'Scott', '(208) 212-2562'),
+('Jaime', 'Rodriguez', '(208) 647-6258'),
+('Jeff', 'Hill', '(208) 475-6952'),
+('Laura', 'Taylor', '(208) 368-6541'),
+('Steven', 'Lee', '(208) 321-6543'),
+('Kat', 'Davis', '(208) 987-6543'),
+('David', 'Jones', '(208) 210-3654'),
+('Jackson', 'Moore', '(208) 945-2543'),
+('Emilia', 'Walker', '(208) 478-7852'),
+('Nathan', 'Young', '(208) 752-6547');
 GO
 
 --Delete the 20th line of the Borrowed table
-DELETE Borrowed
-WHERE Borrower_ID = 20;
+--DELETE Borrowed
+--WHERE Borrower_ID = 20;
 
 --Insert data into the CD_Borrowed Table
 INSERT INTO CD_Borrowed
@@ -267,7 +268,7 @@ FROM CD_Borrowed
 WHERE Returned_Date IS NULL
 
 /***************************************
-			PROJECT 3
+			PROJECT 4
 ***************************************/
 
 
@@ -331,3 +332,278 @@ FROM CD JOIN CD_Borrowed
 	JOIN Borrowed ON Borrowed.Borrower_ID = CD_Borrowed.Borrower_ID
 WHERE Returned_Date IS NULL;
 GO
+
+
+/***************************************
+			PROJECT 5
+***************************************/
+
+--2.
+USE [disk_inventoryJK]
+GO
+
+-- Drop the stored procedure if it already exists
+DROP PROCEDURE IF EXISTS sp_insert_artist;
+GO
+
+--Create procedure to insert data into Artist
+CREATE PROCEDURE sp_insert_artist
+@name varchar(60), @typeid int
+AS
+BEGIN TRY
+	INSERT INTO [dbo].[Artist]
+			   ([Artist_Name]
+			   ,[Artist_Type_ID])
+		 VALUES
+			   ( @name
+			   , @typeid)
+END TRY
+BEGIN CATCH
+	PRINT 'There was an error';
+	PRINT 'Message' + CONVERT(VARCHAR(200), ERROR_MESSAGE());
+END CATCH
+GO
+
+--Give permission to execute stored procedure to user
+GRANT EXECUTE ON sp_insert_artist TO diskUserJK;
+
+--Execute the stored procedure
+EXEC sp_insert_artist 'name', 2;
+
+-- Drop the stored procedure if it already exists
+DROP PROCEDURE IF EXISTS sp_update_artist
+GO
+
+--Create procedure to update Artist
+CREATE PROCEDURE sp_update_artist
+	@artistid int, @name varchar(60), @typeid int
+AS
+	BEGIN TRY
+	UPDATE [dbo].[Artist]
+			 SET	[Artist_Name] = @name
+					,[Artist_Type_ID] = @typeid
+			WHERE Artist_ID = @artistid
+	END TRY
+	BEGIN CATCH
+		PRINT 'There was an error';
+		PRINT 'Message' + CONVERT(VARCHAR(200), ERROR_MESSAGE());
+	END CATCH
+GO
+
+--Give permission to execute stored procedure to user
+GRANT EXECUTE ON sp_update_artist TO diskUserJK;
+
+--Execute the stored procedure
+EXEC sp_update_artist 21, 'updated', 2;
+
+
+-- Drop the stored procedure if it already exists
+DROP PROCEDURE IF EXISTS sp_delete_artist
+GO
+
+-- Create procedure to delete column from Artist
+CREATE PROCEDURE sp_delete_artist
+	@artistid int
+AS
+	BEGIN TRY
+		DELETE FROM [dbo].[Artist]
+			WHERE Artist_ID = @artistid
+	END TRY
+	BEGIN CATCH
+		PRINT 'There was an error';
+		PRINT 'Message' + CONVERT(VARCHAR(200), ERROR_MESSAGE());
+	END CATCH
+GO
+
+--Give permission to execute stored procedure to user
+GRANT EXECUTE ON sp_delete_artist TO diskUserJK;
+
+--Execute the stored procedure
+EXEC sp_delete_artist 21;
+
+
+
+--3.
+
+-- Drop the stored procedure if it already exists
+DROP PROCEDURE IF EXISTS sp_insert_borrower;
+GO
+
+
+-- Create procedure to insert data into Borrowed
+CREATE PROCEDURE sp_insert_borrower
+@fname varchar(60), @lname VARCHAR(60), @phone VARCHAR(60)
+AS
+BEGIN TRY
+	INSERT INTO [dbo].[Borrowed]
+			   (Borrower_FName
+			   ,Borrower_LName
+			   ,Borrower_Phone)
+		 VALUES
+			   ( @fname
+			   , @lname
+			   , @phone)
+END TRY
+BEGIN CATCH
+	PRINT 'There was an error';
+	PRINT 'Message' + CONVERT(VARCHAR(200), ERROR_MESSAGE());
+END CATCH
+GO
+
+--Give permission to execute stored procedure to user
+GRANT EXECUTE ON sp_insert_borrower TO diskUserJK;
+GO
+
+--Execute the stored procedure
+EXEC sp_insert_borrower 'fname', 'lname', 'number';
+GO
+
+-- Drop the stored procedure if it already exists
+DROP PROCEDURE IF EXISTS sp_update_borrower
+GO
+
+--Create procedure to update data in Borrowed
+CREATE PROCEDURE sp_update_borrower
+	@borrowedid int, @fname varchar(60), @lname VARCHAR(60), @phone VARCHAR(60)
+AS
+	BEGIN TRY
+	UPDATE [dbo].[Borrowed]
+			 SET	Borrower_FName = @fname
+					,Borrower_LName = @lname
+					,Borrower_Phone = @phone
+			WHERE Borrower_ID = @borrowedid
+	END TRY
+	BEGIN CATCH
+		PRINT 'There was an error';
+		PRINT 'Message' + CONVERT(VARCHAR(200), ERROR_MESSAGE());
+	END CATCH
+GO
+
+--Give permission to execute stored procedure to user
+GRANT EXECUTE ON sp_update_borrower TO diskUserJK;
+GO
+
+--Execute the stored procedure
+EXEC sp_update_borrower 21, 'updatedfname', 'updatedlname', 'updatednumber';
+GO
+
+
+-- Drop the stored procedure if it already exists
+DROP PROCEDURE IF EXISTS sp_delete_borrower
+GO
+
+--Create procedure to delete data from borrowed
+CREATE PROCEDURE sp_delete_borrower
+	@borrowedid int
+AS
+	BEGIN TRY
+		DELETE FROM [dbo].[Borrowed]
+			WHERE Borrower_ID = @borrowedid
+	END TRY
+	BEGIN CATCH
+		PRINT 'There was an error';
+		PRINT 'Message' + CONVERT(VARCHAR(200), ERROR_MESSAGE());
+	END CATCH
+GO
+
+--Give permission to execute stored procedure to user
+GRANT EXECUTE ON sp_delete_borrower TO diskUserJK;
+GO
+
+--Execute the stored procedure
+EXEC sp_delete_borrower 21;
+GO
+EXEC sp_delete_borrower 2;
+GO
+
+--4.
+
+-- Drop the stored procedure if it already exists
+DROP PROCEDURE IF EXISTS sp_insert_CD;
+GO
+
+--Create procedure to insert data into CD
+CREATE PROCEDURE sp_insert_CD
+@name varchar(60), @date date, @typeid int, @statusid int, @genreid int
+AS
+BEGIN TRY
+	INSERT INTO [dbo].[CD]
+			   (CD_name
+			   ,Release_Date
+			   ,Type_ID
+			   ,Status_ID
+			   , Genre_ID)
+		 VALUES
+			   ( @name
+			   , @date
+			   , @typeid
+			   , @statusid
+			   , @genreid)
+END TRY
+BEGIN CATCH
+	PRINT 'There was an error';
+	PRINT 'Message' + CONVERT(VARCHAR(200), ERROR_MESSAGE());
+END CATCH
+GO
+
+--Give permission to execute stored procedure to user
+GRANT EXECUTE ON sp_insert_CD TO diskUserJK;
+
+EXEC sp_insert_CD 'name', '2/2/2020', 2, 2, 2;
+
+-- Drop the stored procedure if it already exists
+DROP PROCEDURE IF EXISTS sp_update_CD
+GO
+
+--Create Procedure to update data in CD
+CREATE PROCEDURE sp_update_CD
+	@cdid int, @name varchar(60), @date date, @typeid int, @statusid int, @genreid int
+AS
+	BEGIN TRY
+	UPDATE [dbo].[CD]
+			SET CD_name = @name
+			   ,Release_Date = @date
+			   ,Type_ID = @typeid
+			   ,Status_ID = @statusid
+			   , Genre_ID = @genreid
+			WHERE CD_ID = @cdid
+	END TRY
+	BEGIN CATCH
+		PRINT 'There was an error';
+		PRINT 'Message' + CONVERT(VARCHAR(200), ERROR_MESSAGE());
+	END CATCH
+GO
+
+
+--Give permission to execute stored procedure to user
+GRANT EXECUTE ON sp_update_borrower TO diskUserJK;
+
+--Execute the stored procedure
+EXEC sp_update_CD 21, 'name', '2/2/2020', 2, 2, 2;
+
+
+-- Drop the stored procedure if it already exists
+DROP PROCEDURE IF EXISTS sp_delete_CD
+GO
+
+--Create procedure to delete data in CD
+CREATE PROCEDURE sp_delete_CD
+	@cdid int
+AS
+	BEGIN TRY
+		DELETE FROM [dbo].[CD]
+			WHERE CD_ID = @cdid
+	END TRY
+	BEGIN CATCH
+		PRINT 'There was an error';
+		PRINT 'Message' + CONVERT(VARCHAR(200), ERROR_MESSAGE());
+	END CATCH
+GO
+
+
+--Give permission to execute stored procedure to user
+GRANT EXECUTE ON sp_delete_CD TO diskUserJK;
+
+--Execute the stored procedure
+EXEC sp_delete_CD 21;
+EXEC sp_delete_CD 2;
