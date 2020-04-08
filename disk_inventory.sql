@@ -366,10 +366,12 @@ GO
 
 --Give permission to execute stored procedure to user
 GRANT EXECUTE ON sp_insert_artist TO diskUserJK;
+GO				  
 
 --Execute the stored procedure
 EXEC sp_insert_artist 'name', 2;
-
+GO
+				  
 -- Drop the stored procedure if it already exists
 DROP PROCEDURE IF EXISTS sp_update_artist
 GO
@@ -392,10 +394,11 @@ GO
 
 --Give permission to execute stored procedure to user
 GRANT EXECUTE ON sp_update_artist TO diskUserJK;
-
+GO
+					  
 --Execute the stored procedure
 EXEC sp_update_artist 21, 'updated', 2;
-
+GO
 
 -- Drop the stored procedure if it already exists
 DROP PROCEDURE IF EXISTS sp_delete_artist
@@ -417,10 +420,11 @@ GO
 
 --Give permission to execute stored procedure to user
 GRANT EXECUTE ON sp_delete_artist TO diskUserJK;
-
+GO
+					  
 --Execute the stored procedure
 EXEC sp_delete_artist 21;
-
+GO
 
 
 --3.
@@ -548,9 +552,11 @@ GO
 
 --Give permission to execute stored procedure to user
 GRANT EXECUTE ON sp_insert_CD TO diskUserJK;
-
+GO
+				  
 EXEC sp_insert_CD 'name', '2/2/2020', 2, 2, 2;
-
+GO
+				  
 -- Drop the stored procedure if it already exists
 DROP PROCEDURE IF EXISTS sp_update_CD
 GO
@@ -603,7 +609,10 @@ GO
 
 --Give permission to execute stored procedure to user
 GRANT EXECUTE ON sp_delete_CD TO diskUserJK;
-
+GO
+					  
 --Execute the stored procedure
 EXEC sp_delete_CD 21;
+GO					  
 EXEC sp_delete_CD 2;
+GO					 
