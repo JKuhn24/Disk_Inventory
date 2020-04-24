@@ -1,0 +1,56 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="DiscInventory.Site1" %>
+
+<!DOCTYPE html>
+
+<!-- 
+
+Original Author: Jeffrey Kuhn
+Date Created: 11/21/19
+Version: 1
+Date Last Modified: 11/21/19
+Modified by: Jeffrey Kuhn
+Modification log: Page created
+ 
+-->
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="css/style.css" rel="stylesheet" />
+</head>
+<body>
+            <!-- Header that will be displayed on all pages. -->
+            <header>
+            <h1>Disk Borrowers</h1>
+            
+            <nav>
+                <ul>
+                    <li><a href="default.aspx">Home</a></li>
+                    <li><a href="borrower.aspx">Rent a CD</a></li>
+                    <li><a href="artists.aspx">Add new Artists</a></li>
+                    <li><a href="disks.aspx">Add New CDs</a></li>
+                </ul>
+            </nav>
+        </header>
+    <form id="form1" runat="server">
+            <!-- Content to be used for default.aspx. Will be overridden by other pages. -->
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    <h1>Welcome!</h1>
+            <p>Here at Disk Borrowers we believe that borrowing music is the best way to experience new songs.
+                Just come on by and try out some music from us today! <br /><br /> Soon to be introduced: Movies.
+            </p>
+            </asp:ContentPlaceHolder>
+    </form>
+    <!-- Footer that will be displayed on all pages. -->
+    <footer>
+            <div id="foot">
+                <h3>Contact Us:</h3>
+                <p> 11532 W Place Rd. <br/> <br/>
+                <a href="#">placeholder@gmail.com</a><br/><br/>
+                <a href="#">(208)546-7324</a></p>
+            </div>
+        </footer>
+</body>
+</html>
