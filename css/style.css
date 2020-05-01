@@ -86,6 +86,23 @@ div .msgLabel{
 #btnClear{
     font-size: 1.5em;
 }
+
+div.tables{
+    align-content: center;
+}
+
+div.CD{
+    margin-left: 0em;
+}
+div.tables2{
+    margin-left: 2em;
+}
+div.tables2 table tbody tr td{
+    margin: .5em;
+}
+.padding{
+    margin: 1em;
+}
 /* Footer Styles */
 footer {
     background: rgb(0, 102, 255);
