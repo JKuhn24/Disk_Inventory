@@ -31,6 +31,23 @@ Modification log: Page created
                     <li><a href="borrower.aspx">Rent a CD</a></li>
                     <li><a href="artists.aspx">Add new Artists</a></li>
                     <li><a href="disks.aspx">Add New CDs</a></li>
+                    <li><a href="Login.aspx">Login/Logout</a></li>
+                    <%--<li><asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul>
+                                <li><a runat="server" href="~/Account/Register">Register</a></li>
+                                <li><a runat="server" href="~/Account/Login">Log in</a></li>
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <ul>
+                                
+                                <li>
+                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                </li>
+                            </ul>
+                        </LoggedInTemplate>
+                    </asp:LoginView></li>--%>
                 </ul>
             </nav>
         </header>
